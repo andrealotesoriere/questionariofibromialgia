@@ -17,6 +17,20 @@
   table { width: 100%; border-collapse: collapse; }
   th, td { padding: 8px; text-align: left; }
 
+  /* Stili per il nuovo pulsante */
+  .fiqr-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .fiqr-button:hover {
+    background-color: #0056b3;
+  }
+
   /* Stili per la stampa */
   @media print {
     body {
@@ -24,7 +38,7 @@
     }
     
     /* Nasconde elementi non essenziali per il referto */
-    .print-button, .other-pathology-section {
+    .print-button, .other-pathology-section, .fiqr-button, #fiqr-button-container {
       display: none;
     }
     
@@ -187,6 +201,10 @@
 <div class="question-section">
   <p class="score">Punteggio Totale: <span id="total-score">0</span> /31</p>
   <p class="diagnosis-result">Criteri soddisfatti: <span id="diagnosis-text">Nessun risultato</span></p>
+  
+  <div id="fiqr-button-container" style="display: none; margin-top: 15px;">
+    <button onclick="window.location.href='fiqr_questionnaire.html'" class="fiqr-button">Compila Questionario FIQ-R</button>
+  </div>
 </div>
 
 <div class="signature-section">
@@ -241,12 +259,18 @@
       }
     }
     
+    const fiqrButtonContainer = document.getElementById('fiqr-button-container');
+
     if (criteriaMet) {
       diagnosisText.innerText = "RISPETTATI";
       diagnosisText.className = "diagnosis-met";
+      // Mostra il contenitore del pulsante FIQ-R
+      fiqrButtonContainer.style.display = 'block';
     } else {
       diagnosisText.innerText = "NON RISPETTATI";
       diagnosisText.className = "diagnosis-not-met";
+      // Nasconde il contenitore del pulsante FIQ-R
+      fiqrButtonContainer.style.display = 'none';
     }
   }
 
