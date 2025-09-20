@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Questionario FIQ-R</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+  .question-section { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+  h2 { color: #004d99; }
+  ul { list-style-type: none; padding: 0; }
+  li { margin-bottom: 20px; }
+  .question-label { font-weight: bold; }
+  .scale-labels { display: flex; justify-content: space-between; margin-top: 5px; font-size: 0.9em; }
+  .score { margin-top: 20px; font-weight: bold; font-size: 1.1em; }
+  
+  /* Stili per la stampa */
+  @media print {
+    body { font-size: 10pt; }
+    .print-button { display: none; }
+    
+    @page { margin: 1cm; }
+    
+    .question-section, table {
+      page-break-inside: avoid;
+    }
+
+    .signature-section {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid #000;
+    }
+    .signature-line {
+      width: 300px;
+      border-bottom: 1px solid #000;
+      margin-top: 40px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Questionario FIQ-R (Fibromyalgia Impact Questionnaire - Revised)</h1>
+
+<div class="question-section">
+  <h2>DOMINIO 1: FUNZIONE FISICA</h2>
+  <p>Per ognuna delle seguenti nove domande, segni la casella che meglio indica il grado di difficoltà da Lei avvertito, nel corso dell'ultima settimana, a causa della fibromialgia.</p>
+  
+  <form id="domain1-form">
+    <ul>
+      <li>
+        <div class="question-label">1. SPAZZOLARE O PETTINARE I CAPELLI</div>
+        <input type="range" name="q1" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna difficoltà</span><span>Estrema difficoltà</span></div>
+      </li>
+      <li>
+        <div class="question-label">2. CAMMINARE ININTERROTTAMENTE PER 20 MINUTI</div>
+        <input type="range" name="q2" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna difficoltà</span><span>Estrema difficoltà</span></div>
+      </li>
+      <li>
+        <div class="question-label">3. PREPARARE I PASTI</div>
+        <input type="range" name="q3" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna difficoltà</span><span>Estrema difficoltà</span></div>
+      </li>
+      <li>
+        <div class="question-label">4. PASSARE L'ASPIRAPOLVERE E LAVARE I PAVIMENTI</div>
+        <input type="range" name="q4" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna difficoltà</span><span>Estrema difficoltà</span></div>
+      </li>
+      <li>
+        <div class="question-label">5. SOLLEVARE E PORTARE LE BORSE DELLA SPESA</div>
+        <input type="range" name="q5" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna difficoltà</span><span>Estrema difficoltà</span></div>
+      </li>
+      <li>
+        <div class="question-label">6. SALIRE UN PIANO DI SCALE</div>
+        <input type="range" name="q6" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna difficoltà</span><span>Estrema difficoltà</span></div>
+      </li>
+      <li>
+        <div class="question-label">7. CAMBIARE LE LENZUOLA DEL LETTO</div>
+        <input type="range" name="q7" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna difficoltà</span><span>Estrema difficoltà</span></div>
+      </li>
+      <li>
+        <div class="question-label">8. STARE SEDUTO SU UNA SEDIA PER ALMENO 45 MINUTI</div>
+        <input type="range" name="q8" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna difficoltà</span><span>Estrema difficoltà</span></div>
+      </li>
+      <li>
+        <div class="question-label">9. ANDARE A FARE LA SPESA</div>
+        <input type="range" name="q9" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna difficoltà</span><span>Estrema difficoltà</span></div>
+      </li>
+    </ul>
+    <p class="score">SUBTOTALE: <span id="domain1-score">0</span></p>
+  </form>
+</div>
+---
+<div class="question-section">
+  <h2>DOMINIO 2: STATO DI SALUTE GENERALE</h2>
+  <p>Per ognuna delle seguenti due domande, segni la casella che meglio indica il grado di difficoltà da Lei avvertito, nel corso dell'ultima settimana, a causa della fibromialgia.</p>
+  
+  <form id="domain2-form">
+    <ul>
+      <li>
+        <div class="question-label">10. LA FIBROMIALGIA MI HA IMPEDITO DI PORTARE A TERMINE I LAVORI/COMPITI DELLA SETTIMANA</div>
+        <input type="range" name="q10" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Mai</span><span>Sempre</span></div>
+      </li>
+      <li>
+        <div class="question-label">11. SONO STATO/A COMPLETAMENTE SOPRAFFATTO/A DAI SINTOMI DELLA FIBROMIALGIA</div>
+        <input type="range" name="q11" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Mai</span><span>Sempre</span></div>
+      </li>
+    </ul>
+    <p class="score">SUBTOTALE: <span id="domain2-score">0</span></p>
+  </form>
+</div>
+---
+<div class="question-section">
+  <h2>DOMINIO 3: SINTOMI</h2>
+  <p>Per ognuna delle seguenti dieci domande, segni la casella che meglio indica il grado di difficoltà da Lei avvertito, nel corso dell'ultima settimana, a causa della fibromialgia.</p>
+  
+  <form id="domain3-form">
+    <ul>
+      <li>
+        <div class="question-label">12. ASSEGNI UN PUNTEGGIO AL SUO LIVELLO DI DOLORE</div>
+        <input type="range" name="q12" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessun dolore</span><span>Estremo dolore</span></div>
+      </li>
+      <li>
+        <div class="question-label">13. ASSEGNI UN PUNTEGGIO AL SUO LIVELLO DI STANCHEZZA</div>
+        <input type="range" name="q13" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna stanchezza</span><span>Estrema stanchezza</span></div>
+      </li>
+      <li>
+        <div class="question-label">14. ASSEGNI UN PUNTEGGIO AL SUO LIVELLO DI RIGIDITA'</div>
+        <input type="range" name="q14" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna rigidità</span><span>Estrema rigidità</span></div>
+      </li>
+      <li>
+        <div class="question-label">15. ASSEGNI UN PUNTEGGIO ALLA QUALITA' DEL SUO SONNO</div>
+        <input type="range" name="q15" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Ben riposato/a</span><span>Estremamente stanco/a al risveglio</span></div>
+      </li>
+      <li>
+        <div class="question-label">16. ASSEGNI UN PUNTEGGIO AL SUO GRADO DI DEPRESSIONE</div>
+        <input type="range" name="q16" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Per nulla depresso/a</span><span>Estremamente depresso/a</span></div>
+      </li>
+      <li>
+        <div class="question-label">17. ASSEGNI UN PUNTEGGIO AI SUOI PROBLEMI DI MEMORIA</div>
+        <input type="range" name="q17" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Buona memoria</span><span>Scarsissima memoria</span></div>
+      </li>
+      <li>
+        <div class="question-label">18. ASSEGNI UN PUNTEGGIO AL SUO GRADO DI ANSIA</div>
+        <input type="range" name="q18" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Per nulla ansioso/a</span><span>Estremamente ansioso/a</span></div>
+      </li>
+      <li>
+        <div class="question-label">19. ASSEGNI UN PUNTEGGIO AL SUO LIVELLO DI DOLORABILITA' (dolore percepito al tatto)</div>
+        <input type="range" name="q19" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna dolorabilità</span><span>Estrema dolorabilità</span></div>
+      </li>
+      <li>
+        <div class="question-label">20. ASSEGNI UN PUNTEGGIO AL SUO GRADO DI EQUILIBRIO</div>
+        <input type="range" name="q20" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessun problema di equilibrio</span><span>Scarsissimo equilibrio</span></div>
+      </li>
+      <li>
+        <div class="question-label">21. ASSEGNI UN PUNTEGGIO AL LIVELLO DELLA SUA SENSIBILITA' AI RUMORI, ALLE LUCI, AGLI ODORI ED AL FREDDO</div>
+        <input type="range" name="q21" min="0" max="10" value="0" oninput="updateScore()">
+        <div class="scale-labels"><span>Nessuna sensibilità</span><span>Estrema sensibilità</span></div>
+      </li>
+    </ul>
+    <p class="score">SUBTOTALE: <span id="domain3-score">0</span></p>
+  </form>
+</div>
+---
+<div class="question-section">
+  <h2>PUNTEGGIO TOTALE FIQ-R</h2>
+  <p>Punteggio Totale FIQ-R: <span id="total-fiqr-score">0</span></p>
+</div>
+
+<div class="signature-section">
+  <p><strong>Firma del Medico:</strong></p>
+  <div class="signature-line"></div>
+</div>
+
+<div class="print-button">
+  <button onclick="window.print()">Stampa Referto FIQ-R</button>
+</div>
+
+<script>
+  function updateScore() {
+    // Calcola il punteggio del DOMINIO 1 (Funzione Fisica)
+    let domain1Score = 0;
+    for (let i = 1; i <= 9; i++) {
+      const value = document.querySelector(`input[name="q${i}"]`).value;
+      domain1Score += parseInt(value);
+    }
+    document.getElementById('domain1-score').innerText = domain1Score;
+
+    // Calcola il punteggio del DOMINIO 2 (Stato di Salute Generale)
+    let domain2Score = 0;
+    for (let i = 10; i <= 11; i++) {
+      const value = document.querySelector(`input[name="q${i}"]`).value;
+      domain2Score += parseInt(value);
+    }
+    document.getElementById('domain2-score').innerText = domain2Score;
+
+    // Calcola il punteggio del DOMINIO 3 (Sintomi)
+    let domain3Score = 0;
+    for (let i = 12; i <= 21; i++) {
+      const value = document.querySelector(`input[name="q${i}"]`).value;
+      domain3Score += parseInt(value);
+    }
+    document.getElementById('domain3-score').innerText = domain3Score;
+    
+    // Calcola il punteggio totale secondo le istruzioni del PDF
+    const totalScore = (domain1Score / 3) + domain2Score + (domain3Score / 2);
+    document.getElementById('total-fiqr-score').innerText = totalScore.toFixed(2);
+  }
+
+  // Esegue il calcolo iniziale al caricamento della pagina
+  document.addEventListener('DOMContentLoaded', updateScore);
+</script>
+
+</body>
+</html>
