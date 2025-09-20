@@ -17,8 +17,12 @@
   table { width: 100%; border-collapse: collapse; }
   th, td { padding: 8px; text-align: left; }
 
-  /* Stili per il nuovo pulsante */
-  .fiqr-button {
+  /* Stili per i nuovi pulsanti */
+  .button-group {
+    display: flex;
+    gap: 10px;
+  }
+  .fiqr-button, .therapy-button {
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
@@ -26,8 +30,9 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
+    text-decoration: none; /* Rimuove la sottolineatura per i link */
   }
-  .fiqr-button:hover {
+  .fiqr-button:hover, .therapy-button:hover {
     background-color: #0056b3;
   }
 
@@ -38,7 +43,7 @@
     }
     
     /* Nasconde elementi non essenziali per il referto */
-    .print-button, .other-pathology-section, .fiqr-button, #fiqr-button-container {
+    .print-button, .other-pathology-section, .fiqr-button, .therapy-button, #fiqr-button-container {
       display: none;
     }
     
@@ -202,8 +207,11 @@
   <p class="score">Punteggio Totale: <span id="total-score">0</span> /31</p>
   <p class="diagnosis-result">Criteri soddisfatti: <span id="diagnosis-text">Nessun risultato</span></p>
   
-  <div id="fiqr-button-container" style="display: none; margin-top: 15px;">
-    <button onclick="window.location.href='fiqr_questionnaire.html'" class="fiqr-button">Compila Questionario FIQ-R</button>
+  <div id="button-container" style="display: none; margin-top: 15px;">
+    <div class="button-group">
+      <a href="fiqr_questionnaire.html" class="fiqr-button">Compila Questionario FIQ-R</a>
+      <a href="https://www.google.com/search?q=opzioni+terapeutiche+per+la+fibromialgia" target="_blank" class="therapy-button">Opzioni Terapeutiche</a>
+    </div>
   </div>
 </div>
 
@@ -259,18 +267,18 @@
       }
     }
     
-    const fiqrButtonContainer = document.getElementById('fiqr-button-container');
+    const buttonContainer = document.getElementById('button-container');
 
     if (criteriaMet) {
       diagnosisText.innerText = "RISPETTATI";
       diagnosisText.className = "diagnosis-met";
-      // Mostra il contenitore del pulsante FIQ-R
-      fiqrButtonContainer.style.display = 'block';
+      // Mostra il contenitore dei pulsanti
+      buttonContainer.style.display = 'block';
     } else {
       diagnosisText.innerText = "NON RISPETTATI";
       diagnosisText.className = "diagnosis-not-met";
-      // Nasconde il contenitore del pulsante FIQ-R
-      fiqrButtonContainer.style.display = 'none';
+      // Nasconde il contenitore dei pulsanti
+      buttonContainer.style.display = 'none';
     }
   }
 
